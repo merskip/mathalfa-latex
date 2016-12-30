@@ -5,9 +5,15 @@ import org.scilab.forge.jlatexmath.TeXFormula;
 import org.scilab.forge.jlatexmath.TeXIcon;
 import pl.merskip.mathalfa.base.core.Symbol;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class LatexGenerator {
     
@@ -19,6 +25,18 @@ public class LatexGenerator {
     
     public LatexGenerator(Configuration configuration) {
         this.configuration = configuration;
+    }
+    
+    public String base64RenderSymbol(Symbol symbol) {
+        BufferedImage image = renderSymbol(symbol);
+    
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "png", Base64.getEncoder().wrap(outputStream));
+            return outputStream.toString(StandardCharsets.UTF_8.name());
+        } catch (IOException ioe) {
+            throw new UncheckedIOException(ioe);
+        }
     }
     
     public BufferedImage renderSymbol(Symbol symbol) {
