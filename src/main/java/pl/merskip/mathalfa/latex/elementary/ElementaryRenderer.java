@@ -30,6 +30,11 @@ public class ElementaryRenderer implements RendererRegister {
     }
     
     @Override
+    public String renderEquation(Symbol leftMember, Symbol rightMember) {
+        return renderSymbol(leftMember) + " = " + renderSymbol(rightMember);
+    }
+    
+    @Override
     public String renderSymbol(Symbol symbol) {
         return getRendererForSymbol(symbol).renderSymbol(this, symbol);
     }
