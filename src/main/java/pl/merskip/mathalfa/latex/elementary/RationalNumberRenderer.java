@@ -4,21 +4,24 @@ import pl.merskip.mathalfa.base.elementary.RationalNumber;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 import pl.merskip.mathalfa.latex.core.SymbolRenderer;
 
-import static java.lang.Math.abs;
+import java.math.BigInteger;
 
 public class RationalNumberRenderer implements SymbolRenderer<RationalNumber> {
     
     @Override
     public String renderSymbol(RendererRegister register, RationalNumber symbol) {
-        String sign = symbol.getNumerator() < 0 ? "-" : "";
-        String numerator = String.valueOf(abs(symbol.getNumerator()));
-        String denominator = String.valueOf(symbol.getDenominator());
+        BigInteger numerator = symbol.getNumerator();
+        BigInteger denominator = symbol.getDenominator();
         
-        if (symbol.getDenominator() == 1) {
-            return sign + numerator;
+        if (symbol.isInteger()) {
+            return numerator.toString();
+        }
+        else if (numerator.signum() == -1
+                && denominator.signum() >= 0) {
+            return String.format("-\\cfrac{%s}{%s}", numerator.abs(), denominator);
         }
         else {
-            return String.format("%s\\cfrac{%s}{%s}", sign, numerator, denominator);
+            return String.format("\\cfrac{%s}{%s}", numerator, denominator);
         }
     }
 }

@@ -56,7 +56,7 @@ public abstract class OperatorRenderer {
     private boolean symbolIsIntegerNumber(Symbol symbol) {
         if (symbol instanceof RationalNumber) {
             RationalNumber number = (RationalNumber) symbol;
-            return number.getDenominator() == 1;
+            return number.isInteger();
         }
         return false;
     }
