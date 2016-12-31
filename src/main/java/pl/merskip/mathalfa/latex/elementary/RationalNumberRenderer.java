@@ -14,14 +14,38 @@ public class RationalNumberRenderer implements SymbolRenderer<RationalNumber> {
         BigInteger denominator = symbol.getDenominator();
         
         if (symbol.isInteger()) {
-            return numerator.toString();
+            return formatNumber(numerator);
         }
         else if (numerator.signum() == -1
                 && denominator.signum() >= 0) {
-            return String.format("-\\cfrac{%s}{%s}", numerator.abs(), denominator);
+            return String.format("-\\cfrac{%s}{%s}",
+                    formatNumber(numerator.abs()), formatNumber(denominator));
         }
         else {
-            return String.format("\\cfrac{%s}{%s}", numerator, denominator);
+            return String.format("\\cfrac{%s}{%s}",
+                    formatNumber(numerator), formatNumber(denominator));
         }
+    }
+    
+    private String formatNumber(BigInteger number) {
+        return formatNumber(number, 3);
+    }
+    
+    private String formatNumber(BigInteger number, int partSize) {
+        String absNumber = number.abs().toString();
+        
+        StringBuilder numberBuilder = new StringBuilder();
+        numberBuilder.append(number.signum() < 0 ? "-" : "");
+
+        int firstPartSize = absNumber.length() % partSize;
+        if (firstPartSize == 0) firstPartSize = partSize;
+        numberBuilder.append(absNumber.substring(0, firstPartSize));
+        
+        for (int i = firstPartSize; i < absNumber.length(); i += partSize) {
+            numberBuilder.append("~");
+            numberBuilder.append(absNumber.substring(i, i+partSize));
+        }
+
+        return numberBuilder.toString();
     }
 }
