@@ -1,9 +1,7 @@
 package pl.merskip.mathalfa.latex.elementary;
 
 import pl.merskip.mathalfa.base.core.Symbol;
-import pl.merskip.mathalfa.base.elementary.NumberAddition;
-import pl.merskip.mathalfa.base.elementary.NumberSubtraction;
-import pl.merskip.mathalfa.base.elementary.RationalNumber;
+import pl.merskip.mathalfa.base.elementary.*;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 import pl.merskip.mathalfa.latex.core.SymbolRenderer;
 
@@ -23,6 +21,8 @@ public class ElementaryRenderer implements RendererRegister {
         register(RationalNumber.class, new RationalNumberRenderer());
         register(NumberAddition.class, new NumberAdditionRenderer());
         register(NumberSubtraction.class, new NumberSubtractionRenderer());
+        register(NumberMultiplication.class, new NumberMultiplicationRenderer());
+        register(NumberDivision.class, new NumberDivisionRenderer());
     }
     
     private <T extends Symbol> void register(Class<T> symbolClass, SymbolRenderer<T> renderer) {

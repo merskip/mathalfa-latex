@@ -2,8 +2,7 @@ package pl.merskip.mathalfa.latex.elementary;
 
 import pl.merskip.mathalfa.base.core.Operator;
 import pl.merskip.mathalfa.base.core.Symbol;
-import pl.merskip.mathalfa.base.elementary.NumberAddition;
-import pl.merskip.mathalfa.base.elementary.NumberSubtraction;
+import pl.merskip.mathalfa.base.elementary.NumberDivision;
 import pl.merskip.mathalfa.base.elementary.RationalNumber;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 
@@ -32,11 +31,10 @@ public abstract class OperatorRenderer {
         return firstArgLatex + " " + operatorChar + " " + secondArgLatex;
     }
     
-    @SuppressWarnings("RedundantIfStatement")
-    private boolean firstArgumentNeedsParentheses(Symbol firstArgument) {
+    protected boolean firstArgumentNeedsParentheses(Symbol firstArgument) {
+        //noinspection SimplifiableIfStatement
         if (symbolIsIntegerNumber(firstArgument)
-                || firstArgument instanceof NumberAddition
-                || firstArgument instanceof NumberSubtraction ) {
+                || firstArgument instanceof NumberDivision) {
             return false;
         }
         else {
@@ -44,9 +42,10 @@ public abstract class OperatorRenderer {
         }
     }
     
-    @SuppressWarnings("RedundantIfStatement")
-    private boolean secondArgumentNeedsParentheses(Symbol firstArgument) {
-        if (symbolIsIntegerNumber(firstArgument)) {
+    protected boolean secondArgumentNeedsParentheses(Symbol secondArgument) {
+        //noinspection SimplifiableIfStatement
+        if (symbolIsIntegerNumber(secondArgument)
+                || secondArgument instanceof NumberDivision) {
             return false;
         }
         else {

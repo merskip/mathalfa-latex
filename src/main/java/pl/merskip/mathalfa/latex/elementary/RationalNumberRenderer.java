@@ -15,7 +15,7 @@ public class RationalNumberRenderer implements SymbolRenderer<RationalNumber> {
             return numerator;
         }
         else {
-            return String.format("\\frac{%s}{%s}", numerator, denominator);
+            return String.format("\\cfrac{%s}{%s}", numerator, denominator);
         }
     }
 }

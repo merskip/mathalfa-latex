@@ -1,30 +1,26 @@
 package pl.merskip.mathalfa.latex.elementary;
 
 import pl.merskip.mathalfa.base.core.Symbol;
-import pl.merskip.mathalfa.base.elementary.NumberAddition;
 import pl.merskip.mathalfa.base.elementary.NumberMultiplication;
-import pl.merskip.mathalfa.base.elementary.NumberSubtraction;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 import pl.merskip.mathalfa.latex.core.SymbolRenderer;
 
-public class NumberSubtractionRenderer extends OperatorRenderer
-        implements SymbolRenderer<NumberSubtraction> {
+public class NumberMultiplicationRenderer extends OperatorRenderer
+        implements SymbolRenderer<NumberMultiplication> {
     
-    protected NumberSubtractionRenderer() {
-        super("-");
+    public NumberMultiplicationRenderer() {
+        super("\\times");
     }
     
     @Override
-    public String renderSymbol(RendererRegister register, NumberSubtraction symbol) {
+    public String renderSymbol(RendererRegister register, NumberMultiplication symbol) {
         return renderOperator(register, symbol, symbol.getFirstArgument(), symbol.getSecondArgument());
     }
     
     @Override
     protected boolean firstArgumentNeedsParentheses(Symbol firstArgument) {
         //noinspection SimplifiableIfStatement
-        if (firstArgument instanceof NumberAddition
-                || firstArgument instanceof NumberSubtraction
-                || firstArgument instanceof NumberMultiplication) {
+        if (firstArgument instanceof NumberMultiplication) {
             return false;
         }
         else {
