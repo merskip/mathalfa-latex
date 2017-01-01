@@ -13,10 +13,10 @@ public class NumberExponentiationRenderer implements SymbolRenderer<NumberExpone
         String baseLatex = register.renderSymbol(symbol.getBase());
         String powerLatex = register.renderSymbol(symbol.getPower());
         if (baseNeedsParentheses(symbol.getBase())) {
-            return String.format("\\left( %s \\right)^{%s}", baseLatex, powerLatex);
+            return String.format("\\left( %s \\right)^{ %s }", baseLatex, powerLatex);
         }
         else {
-            return String.format("%s^{%s}", baseLatex, powerLatex);
+            return String.format("%s^{ %s }", baseLatex, powerLatex);
         }
     }
     
