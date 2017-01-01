@@ -5,7 +5,9 @@ import pl.merskip.mathalfa.base.elementary.*;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 import pl.merskip.mathalfa.latex.core.SymbolRenderer;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ElementaryRenderer implements RendererRegister {
@@ -31,8 +33,10 @@ public class ElementaryRenderer implements RendererRegister {
     }
     
     @Override
-    public String renderEquation(Symbol leftMember, Symbol rightMember) {
-        return renderSymbol(leftMember) + " = " + renderSymbol(rightMember);
+    public String renderEquation(List<Symbol> members) {
+        List<String> membersRendered = new ArrayList<>(members.size());
+        members.forEach(symbol -> membersRendered.add(renderSymbol(symbol)));
+        return String.join(" = ", membersRendered);
     }
     
     @Override
