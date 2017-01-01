@@ -15,9 +15,7 @@ public abstract class OperatorRenderer {
         this.operatorChar = operatorChar;
     }
     
-    protected String renderOperator(RendererRegister register,
-                                    Operator operator,
-                                    Symbol firstArgument, Symbol secondArgument) {
+    protected String renderOperator(RendererRegister register, Operator operator, Symbol firstArgument, Symbol secondArgument) {
         
         String firstArgLatex = register.renderSymbol(firstArgument);
         String secondArgLatex = register.renderSymbol(secondArgument);
@@ -34,7 +32,7 @@ public abstract class OperatorRenderer {
     
     protected boolean firstArgumentNeedsParentheses(Symbol firstArgument) {
         //noinspection SimplifiableIfStatement
-        if (symbolIsIntegerNumber(firstArgument)
+        if (firstArgument instanceof RationalNumber
                 || firstArgument instanceof NumberDivision
                 || firstArgument instanceof NumberExponentiation) {
             return false;
@@ -46,7 +44,7 @@ public abstract class OperatorRenderer {
     
     protected boolean secondArgumentNeedsParentheses(Symbol secondArgument) {
         //noinspection SimplifiableIfStatement
-        if (symbolIsIntegerNumber(secondArgument)
+        if (secondArgument instanceof RationalNumber
                 || secondArgument instanceof NumberDivision
                 || secondArgument instanceof NumberExponentiation) {
             return false;
@@ -54,13 +52,5 @@ public abstract class OperatorRenderer {
         else {
             return true;
         }
-    }
-    
-    private boolean symbolIsIntegerNumber(Symbol symbol) {
-        if (symbol instanceof RationalNumber) {
-            RationalNumber number = (RationalNumber) symbol;
-            return number.isInteger();
-        }
-        return false;
     }
 }

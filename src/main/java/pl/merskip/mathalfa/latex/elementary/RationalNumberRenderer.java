@@ -18,11 +18,11 @@ public class RationalNumberRenderer implements SymbolRenderer<RationalNumber> {
         }
         else if (numerator.signum() == -1
                 && denominator.signum() >= 0) {
-            return String.format("-\\cfrac{%s}{%s}",
+            return String.format("-\\tfrac{%s}{%s}",
                     formatNumber(numerator.abs()), formatNumber(denominator));
         }
         else {
-            return String.format("\\cfrac{%s}{%s}",
+            return String.format("\\tfrac{%s}{%s}",
                     formatNumber(numerator), formatNumber(denominator));
         }
     }
