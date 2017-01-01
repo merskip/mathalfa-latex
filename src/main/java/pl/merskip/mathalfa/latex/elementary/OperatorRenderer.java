@@ -3,6 +3,7 @@ package pl.merskip.mathalfa.latex.elementary;
 import pl.merskip.mathalfa.base.core.Operator;
 import pl.merskip.mathalfa.base.core.Symbol;
 import pl.merskip.mathalfa.base.elementary.NumberDivision;
+import pl.merskip.mathalfa.base.elementary.NumberExponentiation;
 import pl.merskip.mathalfa.base.elementary.RationalNumber;
 import pl.merskip.mathalfa.latex.core.RendererRegister;
 
@@ -34,7 +35,8 @@ public abstract class OperatorRenderer {
     protected boolean firstArgumentNeedsParentheses(Symbol firstArgument) {
         //noinspection SimplifiableIfStatement
         if (symbolIsIntegerNumber(firstArgument)
-                || firstArgument instanceof NumberDivision) {
+                || firstArgument instanceof NumberDivision
+                || firstArgument instanceof NumberExponentiation) {
             return false;
         }
         else {
@@ -45,7 +47,8 @@ public abstract class OperatorRenderer {
     protected boolean secondArgumentNeedsParentheses(Symbol secondArgument) {
         //noinspection SimplifiableIfStatement
         if (symbolIsIntegerNumber(secondArgument)
-                || secondArgument instanceof NumberDivision) {
+                || secondArgument instanceof NumberDivision
+                || secondArgument instanceof NumberExponentiation) {
             return false;
         }
         else {

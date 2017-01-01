@@ -23,6 +23,7 @@ public class ElementaryRenderer implements RendererRegister {
         register(NumberSubtraction.class, new NumberSubtractionRenderer());
         register(NumberMultiplication.class, new NumberMultiplicationRenderer());
         register(NumberDivision.class, new NumberDivisionRenderer());
+        register(NumberExponentiation.class, new NumberExponentiationRenderer());
     }
     
     private <T extends Symbol> void register(Class<T> symbolClass, SymbolRenderer<T> renderer) {
